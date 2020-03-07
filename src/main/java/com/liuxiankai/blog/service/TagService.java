@@ -8,13 +8,13 @@ import org.springframework.data.domain.Pageable;
  * @author liuxiankai
  */
 public interface TagService {
-    Tag saveType(Tag tag);
+    Tag saveTag(Tag tag);
 
-    Tag getType(Long id);
+    Tag getTag(Long id);
 
     Page<Tag> listTag(Pageable pageable);
 
-    Tag updateTag(Long id,Tag type);
+    Tag updateTag(Long id,Tag tag);
 
     void delTag(Long id);
 
