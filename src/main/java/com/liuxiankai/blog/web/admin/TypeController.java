@@ -4,6 +4,7 @@ package com.liuxiankai.blog.web.admin;
 import com.liuxiankai.blog.po.Type;
 import com.liuxiankai.blog.po.User;
 import com.liuxiankai.blog.service.TypeService;
+import com.liuxiankai.blog.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -32,8 +33,8 @@ public class TypeController {
     private TypeService typeService;
 
     @GetMapping("/typeManage")
-    public String Types(@PageableDefault(size = 6, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, Model model,HttpSession session) {
-        boolean check = check(session);
+    public String types(@PageableDefault(size = 6, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable, Model model,HttpSession session) {
+        boolean check = Utils.check(session);
         if (check){
             model.addAttribute("info","您是super管理员,可以执行任意操作");
         } else {
@@ -98,11 +99,5 @@ public class TypeController {
         return "redirect:/admin/typeManage";
     }
 
-    public boolean check(HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user.getType() != 1) {
-            return false;
-        }
-        return true;
-    }
+
 }
