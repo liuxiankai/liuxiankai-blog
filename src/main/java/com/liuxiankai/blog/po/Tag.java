@@ -25,8 +25,18 @@ public class Tag {
     @NotBlank(message = "类型名称不能为空")
     private String name;
 
+    @Override
+    public String toString() {
+        return "Tag{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     @ManyToMany(mappedBy = "tags")
     private List<Blog> blogs = new ArrayList<>();
+
+
     public Tag() {
     }
 }

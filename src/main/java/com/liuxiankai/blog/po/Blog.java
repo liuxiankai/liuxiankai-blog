@@ -24,7 +24,6 @@ import java.util.List;
 @Entity
 @Table(name = "t_blog")
 public class Blog {
-
     /**
      * id: 博客编号
      * title: 博客标题
@@ -71,6 +70,54 @@ public class Blog {
 
     @OneToMany(mappedBy = "blog")
     private List<Comment> comments = new ArrayList<>();
+
     public Blog() {
+    }
+
+    public void init() {
+        this.tagIds = tagsTool(this.getTags());
+
+    }
+
+    private String tagsTool(List<Tag> tags) {
+        if (!tags.isEmpty()) {
+            StringBuffer ids = new StringBuffer();
+            boolean flag = false;
+            for (Tag t : tags) {
+                if (flag) {
+                    ids.append(",");
+                } else {
+                    flag = true;
+                }
+                ids.append(t.getId());
+            }
+            return ids.toString();
+        } else {
+            return tagIds;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Blog{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", firstPicture='" + firstPicture + '\'' +
+                ", flag='" + flag + '\'' +
+                ", views=" + views +
+                ", appreciation=" + appreciation +
+                ", shareStatement=" + shareStatement +
+                ", commentTabled=" + commentTabled +
+                ", published=" + published +
+                ", recommend=" + recommend +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", type=" + type +
+                ", tagIds='" + tagIds + '\'' +
+                ", tags=" + tags +
+                ", user=" + user +
+                ", comments=" + comments +
+                '}';
     }
 }

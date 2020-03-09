@@ -23,11 +23,21 @@ public class Type {
     @GeneratedValue
     private Long id;
 
+    @Override
+    public String toString() {
+        return "Type{" +
+                "id=" + id +
+                ", name='" + name+
+                '}';
+    }
+
     @NotBlank(message = "类型名称不能为空")
     private String name;
 
     @OneToMany(mappedBy = "type")
     private List<Blog> blogs = new ArrayList<>();
+
+
     public Type() {
     }
 }

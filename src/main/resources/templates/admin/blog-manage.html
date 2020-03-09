@@ -112,12 +112,12 @@
                     <td th:text="${blog.title}">撒大大</td>
                     <td th:text="${blog.type.name}">认知升级</td>
                     <td th:text="${blog.recommend} ? '是' : '否'">是</td>
-                    <td th:text="${blog.published} ? '草稿' : '发布'">草稿</td>
+                    <td th:text="${blog.published} ? '发布' : '草稿'">草稿</td>
                     <td th:text="${blog.updateTime}">2017-03-05</td>
                     <td>
                         <a href="#" th:href="@{/admin/blogManage/{id}/input(id=${blog.id})}"
                            class="ui mini teal basic button">编辑</a>
-                        <a href="#" th:href="@{/admin/blogManage/{id}/delete(id=${blog.id})}"
+                        <a href="#" th:href="@{/admin/blogManage/del/{id}(id=${blog.id})}"
                            class="ui mini red basic button">删除</a>
                     </td>
                 </tr>
