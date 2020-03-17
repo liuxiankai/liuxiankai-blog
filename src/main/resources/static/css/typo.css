@@ -29,6 +29,10 @@
     border: 0;
 }
 
+.typo li{
+    font-weight: 300;
+    padding: 4px 0;
+}
 /* 块/段落引用 */
 .typo blockquote {
     position: relative;

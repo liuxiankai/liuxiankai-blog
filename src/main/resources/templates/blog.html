@@ -42,31 +42,36 @@
         <div class="ui top attached segment">
             <div class="ui horizontal link list">
                 <div class="item">
-                    <img src="https://picsum.photos/100/100?image=1005" alt="" class="ui avatar image">
+                    <img src="https://picsum.photos/100/100?image=1005" th:src="@{${blog.user.avatar}}" alt=""
+                         class="ui avatar image">
                     <div class="content">
-                        <a href="#" class="header">柳先开</a>
+                        <a href="#" class="header" th:text="${blog.user.nickName}">柳先开</a>
                     </div>
                 </div>
                 <div class="item">
-                    <i class="calendar icon"></i>2020-3-5
+                    <i class="calendar icon"></i>
+                    <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-3-5</span>
                 </div>
                 <div class="item">
-                    <i class="eye icon"></i>1233
+                    <i class="eye icon"></i>
+                    <span th:text="${blog.views}">1233</span>
                 </div>
             </div>
         </div>
         <!--        图片区域-->
         <div class="ui attached segment">
-            <img src="https://picsum.photos/800/450?image=1005" alt="" class="ui fluid rounded image">
+            <img src="https://picsum.photos/800/450?image=1005" th:src="${blog.firstPicture}" alt=""
+                 class="ui fluid rounded image">
         </div>
         <!--            内容区域-->
         <div class="ui attached padded segment">
             <div class="ui right aligned basic segment">
-                <dvi class="ui orange basic label">原创</dvi>
+                <dvi class="ui orange basic label" th:text="${blog.flag}">原创</dvi>
             </div>
-            <h2 class="ui center aligned header">程序员，承认吧，都是你的错</h2>
+            <h2 class="ui center aligned header" th:text="${blog.title}">程序员，承认吧，都是你的错</h2>
             <br>
-            <div id="content" class="typo typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large">
+            <div id="content" class="typo typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large"
+                 th:utext="${blog.content}">
                 <h2 id="section1">一、关于 <i class="serif">Typo.css</i></h2>
                 <pre><code class="language-css">p { color:red}</code></pre>
                 <p><i class="serif">Typo.css</i> 的目的是，在一致化浏览器排版效果的同时，构建最适合中文阅读的网页排版。</p>
@@ -456,7 +461,7 @@
             </div>
             <!--            标签-->
             <div class="m-padded-lr-responsive m-padded-tb-large">
-                <div class="ui basic teal label">方法论</div>
+                <div class="ui basic teal label" th:each="tag : ${blog.tags}" th:text="${tag.name}">方法论</div>
             </div>
             <!--            赞赏-->
             <div class="ui center aligned basic segment">
@@ -466,12 +471,14 @@
                 <div class="ui orange basic label">
                     <div class="ui images" style="font-size: inherit !important;">
                         <div class="image">
-                            <img src="../static/images/wechat.png" alt="" class="ui rounded bordered image"
+                            <img src="../static/images/wechat.png" th:src="@{/images/wechat.png}" alt=""
+                                 class="ui rounded bordered image"
                                  style="width: 120px">
                             <div>支付宝</div>
                         </div>
                         <div class="image">
-                            <img src="../static/images/wechat.png" alt="" class="ui rounded bordered image"
+                            <img src="../static/images/wechat.png" th:src="@{/images/wechat.png}" alt=""
+                                 class="ui rounded bordered image"
                                  style="width: 120px">
                             <div>微信</div>
                         </div>
@@ -482,14 +489,16 @@
                 <div class="ui middle aligned grid">
                     <div class="eleven wide column">
                         <ui class="list">
-                            <li>作者：柳先开</li>
-                            <li>发表时间：2020-3-5</li>
+                            <li>作者：<span th:text="${blog.user.nickName}">柳先开</span></li>
+                            <li>发表时间：<span
+                                    th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm')}">2020-3-5</span></li>
                             <li>版权申明：无</li>
                             <li>公众号转载：请在末尾添加作者二维码</li>
                         </ui>
                     </div>
                     <div class="five wide column">
-                        <img src="../static/images/wechat.png" alt="" class="ui right floated rounded bordered image"
+                        <img src="../static/images/wechat.png" th:src="@{/images/wechat.png}" alt=""
+                             class="ui right floated rounded bordered image"
                              style="width: 110px">
                     </div>
                 </div>
@@ -568,6 +577,8 @@
             </div>
             <!--            提交留言区域-->
             <div class="ui form">
+                <input type="text" name="blog.id" th:value="${blog.id}">
+                <input type="text" name="parentComment.id" value="-1">
                 <div class="field">
                     <textarea name="content" placeholder="请输入评论信息..."></textarea>
                 </div>
@@ -575,7 +586,7 @@
                     <div class="field m-mobile-wide m-margin-bottom-small">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input type="text" name="nickname" placeholder="姓名">
+                            <input type="text" name="nickName" placeholder="姓名">
                         </div>
                     </div>
                     <div class="field m-mobile-wide m-margin-bottom-small">
@@ -585,7 +596,9 @@
                         </div>
                     </div>
                     <div class="field m-mobile-wide m-margin-bottom-small">
-                        <button class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布</button>
+                        <button id="commentpost-btn" type="button" class="ui teal button m-mobile-wide"><i
+                                class="edit icon"></i>发布
+                        </button>
                     </div>
                 </div>
 
@@ -656,7 +669,7 @@
     <script src="../static/lib/tocbot/tocbot.min.js"></script>
     <script src="../static/lib/qrcode/qrcode.min.js"></script>
 </div>
-<script>
+<script th:inline="javascript">
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
     });
@@ -681,8 +694,10 @@
         popup: $('.weChatQR')
     });
 
+    var serurl = "101.37.15.178:8080";
+    var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
     var qrcode = new QRCode("qrcode", {
-        text: "http://jindo.dev.naver.com/collie",
+        text: serurl + url,
         width: 120,
         height: 120,
         colorDark: "#000000",
@@ -693,6 +708,53 @@
     $('#toTop-button').click(function () {
         $(window).scrollTo(0, 1000);
     });
+
+    $('.ui.form').form({
+        fields: {
+            title: {
+                identifier: 'content',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入评论内容',
+                }]
+            },
+            content: {
+                identifier: 'nickName',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入你的大名'
+                }]
+            },
+            type: {
+                identifier: 'email',
+                rules: [{
+                    type: 'email',
+                    prompt: '请填写正确的邮箱地址'
+                }]
+            }
+        },
+    });
+
+    $('#commentpost-btn').click(function () {
+        var boo = $('.ui.form').form('validate form');
+        if (boo) {
+            console.log('校验失败')
+        } else {
+            console.log('校验失败')
+        }
+    });
+
+    function postData() {
+        $("#comment-container").load(/*[[@{/comments}]]*/"", {
+            "parentComment.id": $("[name='parentComment.id']").val(),
+            "blog.id": $("[name='blog.id']").val(),
+            "nickName": $("[name='nickName']").val(),
+            "email": $("[name='email']").val(),
+            "content": $("[name='content']").val()
+        }, function (responseTxt, statusTxt, xhr) {
+
+        })
+    }
 </script>
 </body>
 </html>

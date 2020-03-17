@@ -44,6 +44,7 @@ public class Blog {
     private Long id;
     private String title;
     private String content;
+    private String description;
     private String firstPicture;
     private String flag;
     private Integer views;
@@ -103,6 +104,7 @@ public class Blog {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
+                ", description='" + description + '\'' +
                 ", firstPicture='" + firstPicture + '\'' +
                 ", flag='" + flag + '\'' +
                 ", views=" + views +

@@ -23,10 +23,12 @@
             <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="clone icon"></i>归档</a>
             <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="info icon"></i>关于我</a>
             <div class="right item m-mobile-hide">
-                <div class="ui icon inverted transparent input">
-                    <input type="text" placeholder="Search....">
-                    <i class="search link icon"></i>
-                </div>
+                <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+                    <div class="ui icon inverted transparent input">
+                        <input type="text" name="query" placeholder="Search...." th:value="${query}">
+                        <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -55,10 +57,8 @@
             </div>
             <div class="three wide column">
                 <h4 class="ui inverted header m-text-thin m-text-spaced ">最新博客</h4>
-                <div class="ui inverted link list">
-                    <a href="#" class="item">用户故事(User story)</a>
-                    <a href="#" class="item">用户故事(User story)</a>
-                    <a href="#" class="item">用户故事(User story)</a>
+                <div class="ui inverted link list" th:each="blog : ${recommendBlogs}">
+                    <a href="#" class="item" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" th:text="${blog.title}">用户故事(User story)</a>
                 </div>
             </div>
             <div class="three wide column">
@@ -76,7 +76,6 @@
         <div class="ui inverted section divider"></div>
         <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright©2019-2020 LiuXianKai Designer By LiuXianKai</p>
     </div>
-
 </footer>
 </body>
 </html>
