@@ -50,8 +50,7 @@ public class Comment {
                 ", content='" + content + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", createTime=" + createTime +
-                ", replyComments=" + replyComments +
-                ", parentComment=" + parentComment +
+                ", replyComments=" + replyComments+
                 '}';
     }
 

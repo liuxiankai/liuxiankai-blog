@@ -19,3 +19,5 @@ logging:
     root: info
     com.liuxiankai: debug
   file: log/blog.log
+
+comment.avatar: /images/avatar.jpg
