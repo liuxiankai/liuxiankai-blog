@@ -127,7 +127,10 @@ public class BlogServiceImpl implements BlogService {
                 e.printStackTrace();
             }
         }
-        BeanUtils.copyProperties(blog, b , Utils.getNullPropertyNames(blog));
+        blog.setUpdateTime(new Date());
+        blog.setCreateTime(new Date());
+        blog.setViews(0);
+        BeanUtils.copyProperties(blog, b);
         return blogRepository.save(b);
     }
 
