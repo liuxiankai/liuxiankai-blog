@@ -30,17 +30,18 @@
                     </div>
                 </form>
             </div>
-            <div class="right m-item m-mobile-hide menu">
-                <div class="ui dropdown item">
+            <div class="right m-item m-mobile-hide menu" >
+                <div class="ui dropdown item" th:if="${session.consumer != null}">
                     <div class="text" >
-                        <img src="https://picsum.photos/100/100?image=1005" alt="" class="ui avatar image" >
-                        <span>柳先开</span>
+                        <img src="https://picsum.photos/100/100?image=1005" th:src="${session.consumer.avatar}" alt="" class="ui avatar image" >
+                        <span th:text="${session.consumer.nickName}">柳先开</span>
                     </div>
                     <i class="dropdown icon"></i>
                     <div class="menu">
-                        <a href="#" th:href="@{/admin/logout}" class="item">注销</a>
+                        <a href="#" class="item">注销</a>
                     </div>
                 </div>
+                <a href="#" th:href="@{/loginList}" class="m-item item m-mobile-hide" th:if="${session.consumer == null}">登录</a>
             </div>
         </div>
     </div>

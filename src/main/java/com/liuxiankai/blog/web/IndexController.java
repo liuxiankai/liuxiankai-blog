@@ -2,6 +2,7 @@ package com.liuxiankai.blog.web;
 
 
 import com.liuxiankai.blog.po.BlogQuery;
+import com.liuxiankai.blog.po.User;
 import com.liuxiankai.blog.service.BlogService;
 import com.liuxiankai.blog.service.TagService;
 import com.liuxiankai.blog.service.TypeService;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @author liuxiankai
@@ -34,7 +37,7 @@ public class IndexController {
     private TypeService typeService;
 
     @GetMapping("/")
-    public String index(@PageableDefault(size = 5, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable, Model model) {
+    public String index(@PageableDefault(size = 5, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable, HttpSession session, Model model) {
         model.addAttribute("page", blogService.listBlog(pageable));
         model.addAttribute("types", typeService.listTypeTop(6));
         model.addAttribute("tags", tagService.listTagTop(10));

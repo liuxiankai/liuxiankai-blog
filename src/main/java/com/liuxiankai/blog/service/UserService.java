@@ -14,4 +14,8 @@ public interface UserService {
      * @return
      */
     User checkUser(String userName, String password);
+
+    User checkConsumerUser(String userName, String password);
+
+    User registerCheck(String userName);
 }
