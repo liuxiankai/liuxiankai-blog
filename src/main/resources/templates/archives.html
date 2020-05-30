@@ -46,6 +46,7 @@
             </div>
         </div>
         <div th:each="item : ${archiveMap}">
+            <br>
             <h2 class="ui center aligned header" th:text="${item.key}">2018</h2>
             <div class="ui fluid vertical menu">
                 <a href="#" th:href="@{/blog/{id}(id = ${blog.id})}" target="_blank" class="item" th:each="blog : ${item.value}">
